@@ -1,8 +1,8 @@
 package com.lm.cms2.config;
 
-import com.huanyunews.news.interceptor.ArticleClickInterceptor;
-import com.huanyunews.news.interceptor.LoginStateInterceptor;
-import com.huanyunews.news.interceptor.PassportInterceptor;
+import com.lm.cms2.interceptor.ArticleClickInterceptor;
+import com.lm.cms2.interceptor.LoginStateInterceptor;
+import com.lm.cms2.interceptor.PassportInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
