@@ -28,18 +28,18 @@ public class WebUploaderController {
 //        String realPath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/public/webuploadimage/";
 
         System.out.println(realPath);
-                File file1=new File(realPath);
-        if (!file1.exists()){
+        File file1 = new File(realPath);
+        if (!file1.exists()) {
             file1.mkdirs();
         }
-        String uploadFileName = System.currentTimeMillis()+"_"+ originalFilename;
-        System.out.println(realPath+uploadFileName);
+        String uploadFileName = System.currentTimeMillis() + "_" + originalFilename;
+        System.out.println(realPath + uploadFileName);
         boolean flag = true;
 
         //合并文件
         RandomAccessFile raFile = null;
         BufferedInputStream inputStream = null;
-        try{
+        try {
             File dirFile = new File(realPath, uploadFileName);
             //以读写的方式打开目标文件
             raFile = new RandomAccessFile(dirFile, "rw");
@@ -50,11 +50,11 @@ public class WebUploaderController {
             while ((length = inputStream.read(buf)) != -1) {
                 raFile.write(buf, 0, length);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             flag = false;
             System.out.println("上传出错:" + e.getMessage());
             throw new IOException(e.getMessage());
-        }finally{
+        } finally {
             try {
                 if (inputStream != null) {
                     inputStream.close();
@@ -62,16 +62,16 @@ public class WebUploaderController {
                 if (raFile != null) {
                     raFile.close();
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 flag = false;
                 System.out.println("上传出错:" + e.getMessage());
                 throw new IOException(e.getMessage());
             }
         }
-        Map map=new HashMap();
-        map.put("jsonrpc","2.0");
-        map.put("result",null);
-        map.put("id",uploadFileName);
+        Map map = new HashMap();
+        map.put("jsonrpc", "2.0");
+        map.put("result", null);
+        map.put("id", uploadFileName);
         return map;
     }
 }

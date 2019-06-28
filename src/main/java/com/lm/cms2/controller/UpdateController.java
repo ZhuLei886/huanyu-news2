@@ -11,12 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.UUID;
+
 @Controller
 public class UpdateController {
     @Autowired
     UserMapper mapper;
 
-    @RequestMapping(value="/testuploadimg", method = RequestMethod.POST)
+    @RequestMapping(value = "/testuploadimg", method = RequestMethod.POST)
     public @ResponseBody
     String uploadImg(@RequestParam("file") MultipartFile file,
                      HttpServletRequest request, HttpSession session) throws IOException {
@@ -24,19 +25,19 @@ public class UpdateController {
         //获取文件名
         String fileName = file.getOriginalFilename();
         //把文件名替换为随机字符串，然后文件名.号后缀保留不变
-        String newname= UUID.randomUUID().toString()+
+        String newname = UUID.randomUUID().toString() +
                 fileName.substring(fileName.lastIndexOf("."));
-        System.out.println("名字"+":"+newname);
+        System.out.println("名字" + ":" + newname);
         /*System.out.println("fileName-->" + fileName);
         System.out.println("getContentType-->" + contentType);*/
         String filePath = request.getSession().getServletContext().getRealPath("/");
-        String t_user_account=session.getAttribute("t_user").toString();
+        String t_user_account = session.getAttribute("t_user").toString();
 //        filePath+newname 路径加名字
-        String t_user_img=file.getOriginalFilename();
-        String t_user_url=filePath+newname;
+        String t_user_img = file.getOriginalFilename();
+        String t_user_url = filePath + newname;
 //        mapper.userhomeimg(t_user_img,t_user_url,t_user_account);
         try {
-            FileUtil.uploadFile(file.getBytes(),filePath,newname);
+            FileUtil.uploadFile(file.getBytes(), filePath, newname);
 //            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
         } catch (Exception e) {
             // TODO: handle exception

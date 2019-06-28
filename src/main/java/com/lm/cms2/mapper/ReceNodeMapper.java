@@ -11,13 +11,13 @@ import java.util.Map;
 @Mapper
 public interface ReceNodeMapper {
     @Select("select * from t_rece_node")
-    public List<Map<String,Object>> getAllReceNodes();
+    public List<Map<String, Object>> getAllReceNodes();
 
     @Select("select * from t_rece_node where t_rece_node_level=1")
-    public List<Map<String,Object>> getFirstNode();
+    public List<Map<String, Object>> getFirstNode();
 
     @Select("select * from t_rece_node where t_rece_node_level=2")
-    public List<Map<String,Object>> getFirstNode2();
+    public List<Map<String, Object>> getFirstNode2();
 
     @Delete(" delete from t_rece_node where t_rece_node_id=#{t_rece_node_id}")
     public boolean deleteReceNodeById(@Param("t_rece_node_id") String t_rece_node_id);
@@ -32,5 +32,5 @@ public interface ReceNodeMapper {
     public void insertReceNode(Map map);
 
     @Select(" select * from t_rece_node where t_rece_node_id=#{t_rece_node_id} ")
-    public List<Map<String,Object>> queryReceNodeById(@Param("t_rece_node_id") String t_t_rece_node_id);
+    public List<Map<String, Object>> queryReceNodeById(@Param("t_rece_node_id") String t_t_rece_node_id);
 }

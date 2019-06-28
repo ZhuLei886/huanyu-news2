@@ -11,7 +11,7 @@ import java.util.Map;
 public interface RoleMapper {
 
     @Select("select * from t_role")
-    public List<Map<String,Object>> getAllRoles();
+    public List<Map<String, Object>> getAllRoles();
 
     @Delete(" delete from t_role where t_role_id=#{t_role_id}")
     public boolean deleteRoleById(@Param("t_role_id") String t_role_id);
@@ -25,5 +25,5 @@ public interface RoleMapper {
     public void insertRole(@Param("t_role_name") String t_role_name);
 
     @Select(" select * from t_role where t_role_id=#{t_role_id} ")
-    public List<Map<String,Object>> queryRoleById(@Param("t_role_id") String t_role_id);
+    public List<Map<String, Object>> queryRoleById(@Param("t_role_id") String t_role_id);
 }

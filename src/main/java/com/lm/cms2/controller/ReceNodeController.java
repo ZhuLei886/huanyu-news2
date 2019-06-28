@@ -18,85 +18,90 @@ public class ReceNodeController {
     ReceNodeMapper mapper;
 
     @RequestMapping("/recenodemanagement")
-    public ModelAndView getReceNode(){
-        ModelAndView mv=new ModelAndView();
-        List recenode=mapper.getAllReceNodes();
-        mv.addObject("allrecenode",recenode);
+    public ModelAndView getReceNode() {
+        ModelAndView mv = new ModelAndView();
+        List recenode = mapper.getAllReceNodes();
+        mv.addObject("allrecenode", recenode);
         mv.setViewName("/app/recenode.html");
         return mv;
     }
+
     @RequestMapping("/newrecenode")
-    public ModelAndView insertReceNode(){
-        ModelAndView mv=new ModelAndView();
+    public ModelAndView insertReceNode() {
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("/app/newrecenode.html");
         return mv;
     }
+
     @RequestMapping("/newrecenode2")
-    public ModelAndView insertReceNode2(){
-        ModelAndView mv=new ModelAndView();
+    public ModelAndView insertReceNode2() {
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("/app/newrecenode2.html");
         return mv;
     }
+
     @RequestMapping("/queryallrecenodes")
     @ResponseBody
-    public List<Map<String,Object>> getAllReceNode(){
-        ModelAndView mv=new ModelAndView();
-        List recenode=mapper.getFirstNode2();
-        return  recenode;
+    public List<Map<String, Object>> getAllReceNode() {
+        ModelAndView mv = new ModelAndView();
+        List recenode = mapper.getFirstNode2();
+        return recenode;
     }
+
     @RequestMapping("/queryfirstnode")
     @ResponseBody
-    public List<Map<String,Object>> getAllFirstNode(){
-        ModelAndView mv=new ModelAndView();
-        List recenode=mapper.getFirstNode();
-        return  recenode;
+    public List<Map<String, Object>> getAllFirstNode() {
+        ModelAndView mv = new ModelAndView();
+        List recenode = mapper.getFirstNode();
+        return recenode;
     }
+
     @RequestMapping("/deleterecenode")
-    public ModelAndView deleteReceNode(String t_rece_node_id){
-        ModelAndView mv=new ModelAndView();
-        if (mapper.deleteReceNodeById(t_rece_node_id)){
-            List recenode=mapper.getAllReceNodes();
-            mv.addObject("allrecenode",recenode);
-            String success="删除成功！";
-            mv.addObject("success",success);
+    public ModelAndView deleteReceNode(String t_rece_node_id) {
+        ModelAndView mv = new ModelAndView();
+        if (mapper.deleteReceNodeById(t_rece_node_id)) {
+            List recenode = mapper.getAllReceNodes();
+            mv.addObject("allrecenode", recenode);
+            String success = "删除成功！";
+            mv.addObject("success", success);
             mv.setViewName("/app/recenode.html");
 
-        }else {
-            List recenode=mapper.getAllReceNodes();
-            mv.addObject("allrecenode",recenode);
+        } else {
+            List recenode = mapper.getAllReceNodes();
+            mv.addObject("allrecenode", recenode);
             mv.setViewName("/app/recenode.html");
-            String error="删除失败？？？";
-            mv.addObject("error",error);
+            String error = "删除失败？？？";
+            mv.addObject("error", error);
         }
         return mv;
     }
 
 
     @RequestMapping("/updaterecenode")
-    public ModelAndView updateReceNode(String t_rece_node_id){
-        ModelAndView mv=new ModelAndView();
-        List<Map<String,Object>> recenode=mapper.queryReceNodeById(t_rece_node_id);
-        mv.addObject("updaterecenode",recenode.get(0));
+    public ModelAndView updateReceNode(String t_rece_node_id) {
+        ModelAndView mv = new ModelAndView();
+        List<Map<String, Object>> recenode = mapper.queryReceNodeById(t_rece_node_id);
+        mv.addObject("updaterecenode", recenode.get(0));
         mv.setViewName("/app/updaterecenode.html");
         return mv;
     }
 
     @RequestMapping("/editrecenode")
-    public ModelAndView updateReceNode(@RequestParam Map map){
-        ModelAndView mv=new ModelAndView();
+    public ModelAndView updateReceNode(@RequestParam Map map) {
+        ModelAndView mv = new ModelAndView();
         mapper.editReceNode(map);
-        List recenode=mapper.getAllReceNodes();
-        mv.addObject("allrecenode",recenode);
+        List recenode = mapper.getAllReceNodes();
+        mv.addObject("allrecenode", recenode);
         mv.setViewName("/app/recenode.html");
         return mv;
     }
 
     @RequestMapping("/saverecenode")
-    public ModelAndView saveReceNode(@RequestParam Map map){
-        ModelAndView mv=new ModelAndView();
+    public ModelAndView saveReceNode(@RequestParam Map map) {
+        ModelAndView mv = new ModelAndView();
         mapper.insertReceNode(map);
-        List recenode=mapper.getAllReceNodes();
-        mv.addObject("allrecenode",recenode);
+        List recenode = mapper.getAllReceNodes();
+        mv.addObject("allrecenode", recenode);
         mv.setViewName("/app/recenode.html");
         return mv;
     }

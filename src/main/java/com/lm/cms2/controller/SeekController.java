@@ -22,61 +22,62 @@ public class SeekController {
     HomeMapper homeMapper;
     @Autowired
     JedisService jedisService;
+
     @RequestMapping("/getindexseek")
-    public List<Map<String,Object>> getIndexSeek(String t_article_title_1){
-        List seek=seekMapper.getIndexSeek(t_article_title_1);
+    public List<Map<String, Object>> getIndexSeek(String t_article_title_1) {
+        List seek = seekMapper.getIndexSeek(t_article_title_1);
         return seek;
     }
+
     @RequestMapping("/clickseek")
-    public ModelAndView clickSeek(String keyword){
-        ModelAndView mv=new ModelAndView();
-        List<Map<String,Object>> articles=seekMapper.getArticle(keyword);
-        mv.addObject("article",articles);
+    public ModelAndView clickSeek(String keyword) {
+        ModelAndView mv = new ModelAndView();
+        List<Map<String, Object>> articles = seekMapper.getArticle(keyword);
+        mv.addObject("article", articles);
         //SY_TJGL
-        List list=homeMapper.getHomeNode();
-        List SY_GGGL=homeMapper.getTjgl("SY_GGGL");
+        List list = homeMapper.getHomeNode();
+        List SY_GGGL = homeMapper.getTjgl("SY_GGGL");
         mv.setViewName("/app/seek");
-        mv.addObject("recenodes",list);
-        mv.addObject("SY_GGGL",SY_GGGL);
+        mv.addObject("recenodes", list);
+        mv.addObject("SY_GGGL", SY_GGGL);
         //hotArticle
         Map hotArticle = new HashMap();
-        List<Map<String,Object>> hotArticles=new ArrayList<>();
-        Set<String> set = jedisService.zrevrange("hotArticles",0,8);
-        for (String str : set){
+        List<Map<String, Object>> hotArticles = new ArrayList<>();
+        Set<String> set = jedisService.zrevrange("hotArticles", 0, 8);
+        for (String str : set) {
             int t_article_id = Integer.parseInt(str.split(":")[1]);
             hotArticle = homeMapper.selectById(t_article_id);
             hotArticles.add(hotArticle);
         }
-        mv.addObject("hotArticles",hotArticles);
+        mv.addObject("hotArticles", hotArticles);
         //
         return mv;
     }
 
     @RequestMapping(path = "/seekrecenode/{name}")
-    public ModelAndView getReceNodeArticle(@PathVariable String name){
-        ModelAndView mv=new ModelAndView();
-        List<Map<String,Object>> articles=seekMapper.getReceNodeArticle(name);
-        mv.addObject("article",articles);
+    public ModelAndView getReceNodeArticle(@PathVariable String name) {
+        ModelAndView mv = new ModelAndView();
+        List<Map<String, Object>> articles = seekMapper.getReceNodeArticle(name);
+        mv.addObject("article", articles);
         //SY_TJGL
-        List list=homeMapper.getHomeNode();
-        List SY_GGGL=homeMapper.getTjgl("SY_GGGL");
+        List list = homeMapper.getHomeNode();
+        List SY_GGGL = homeMapper.getTjgl("SY_GGGL");
         mv.setViewName("/app/seek");
-        mv.addObject("recenodes",list);
-        mv.addObject("SY_GGGL",SY_GGGL);
+        mv.addObject("recenodes", list);
+        mv.addObject("SY_GGGL", SY_GGGL);
         //hotArticle
         Map hotArticle = new HashMap();
-        List<Map<String,Object>> hotArticles=new ArrayList<>();
-        Set<String> set = jedisService.zrevrange("hotArticles",0,8);
-        for (String str : set){
+        List<Map<String, Object>> hotArticles = new ArrayList<>();
+        Set<String> set = jedisService.zrevrange("hotArticles", 0, 8);
+        for (String str : set) {
             int t_article_id = Integer.parseInt(str.split(":")[1]);
             hotArticle = homeMapper.selectById(t_article_id);
             hotArticles.add(hotArticle);
         }
-        mv.addObject("hotArticles",hotArticles);
+        mv.addObject("hotArticles", hotArticles);
         //
         return mv;
     }
-
 
 
 }

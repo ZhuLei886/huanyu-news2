@@ -17,52 +17,60 @@ import java.util.Map;
 public class NoteController {
     @Autowired
     NoteMapper mapper;
+
     @RequestMapping("/note")
-    public ModelAndView getNodes(){
-        ModelAndView mv=new ModelAndView();
+    public ModelAndView getNodes() {
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("/note/note.html");
         return mv;
     }
+
     @RequestMapping("/notemenu")
-    public List<Map<String, Object>> getnode1(){
-        List data=mapper.getNote();
+    public List<Map<String, Object>> getnode1() {
+        List data = mapper.getNote();
         return data;
     }
-//    收一个参数查询一条笔记，然后返回页面
+
+    //    收一个参数查询一条笔记，然后返回页面
     @RequestMapping(path = "/note/{id}")
-    public ModelAndView getNoteContent(@PathVariable String id){
-        ModelAndView mv= new ModelAndView();
-        Map note=mapper.queryByNameNote(id);
-        mv.addObject("note",note);
+    public ModelAndView getNoteContent(@PathVariable String id) {
+        ModelAndView mv = new ModelAndView();
+        Map note = mapper.queryByNameNote(id);
+        mv.addObject("note", note);
         mv.setViewName("/note/note.html");
         return mv;
     }
+
     @RequestMapping("/addnote")
-    public ModelAndView addnote(@RequestParam Map map){
-        ModelAndView mv= new ModelAndView();
+    public ModelAndView addnote(@RequestParam Map map) {
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("/note/note.html");
         mapper.addNote(map);
-        mv.addObject("error","success");
+        mv.addObject("error", "success");
         return mv;
     }
+
     @RequestMapping("/updatenote")
-    public ModelAndView UpdateNote(@RequestParam Map map){
-        ModelAndView mv= new ModelAndView();
+    public ModelAndView UpdateNote(@RequestParam Map map) {
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("/note/note.html");
         mapper.editNoteContent(map);
         return mv;
     }
+
     @RequestMapping("/queryallnotename")
-    public List getAllClassifications(){
-        List<Map<String,Object>> notename= mapper.getNote2();
+    public List getAllClassifications() {
+        List<Map<String, Object>> notename = mapper.getNote2();
         return notename;
     }
+
     @RequestMapping("/delnote")
-    public void delNote(@RequestParam Map map){
+    public void delNote(@RequestParam Map map) {
         mapper.delNote(map);
     }
+
     @RequestMapping("/editname")
-    public void editNote(@RequestParam Map map){
+    public void editNote(@RequestParam Map map) {
         mapper.editName(map);
     }
 }

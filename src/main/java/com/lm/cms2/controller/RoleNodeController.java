@@ -18,32 +18,36 @@ public class RoleNodeController {
     RoleMapper roleMapper;
     @Autowired
     RoleNodeMapper roleNodeMapper;
+
     @RequestMapping("/rolenode")
-    public ModelAndView getUserNodePage(){
-        ModelAndView mv=new ModelAndView();
-        List roles=roleMapper.getAllRoles();
-        List nodes=roleNodeMapper.getAllNodes();
+    public ModelAndView getUserNodePage() {
+        ModelAndView mv = new ModelAndView();
+        List roles = roleMapper.getAllRoles();
+        List nodes = roleNodeMapper.getAllNodes();
         mv.setViewName("/app/rolenode.html");
-        mv.addObject("allroles",roles);
-        mv.addObject("allnodes",nodes);
+        mv.addObject("allroles", roles);
+        mv.addObject("allnodes", nodes);
 
         return mv;
-        }
-     @RequestMapping("/getnodesbyroleid")
-    public List getNodeByRoleId(String t_role_id){
-        List nodes=roleNodeMapper.getRoleNodeById(t_role_id);
+    }
+
+    @RequestMapping("/getnodesbyroleid")
+    public List getNodeByRoleId(String t_role_id) {
+        List nodes = roleNodeMapper.getRoleNodeById(t_role_id);
         return nodes;
-     }
-     @RequestMapping("/getallnodes")
-    public List getNodeByRoleId(){
-        List nodes=roleNodeMapper.getAllNodes();
+    }
+
+    @RequestMapping("/getallnodes")
+    public List getNodeByRoleId() {
+        List nodes = roleNodeMapper.getAllNodes();
         return nodes;
-     }
-     @RequestMapping("/saverolenode")
-    public Map saveRoleNode(@RequestParam Map map1){
-        Map map=new HashMap();
+    }
+
+    @RequestMapping("/saverolenode")
+    public Map saveRoleNode(@RequestParam Map map1) {
+        Map map = new HashMap();
         roleNodeMapper.saveRoleNode(map1);
-        map.put("success","success");
+        map.put("success", "success");
         return map;
-     }
+    }
 }
