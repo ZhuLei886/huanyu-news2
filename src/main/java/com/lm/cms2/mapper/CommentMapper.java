@@ -1,6 +1,7 @@
 package com.lm.cms2.mapper;
 
 
+import com.lm.cms2.model.Comment;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
