@@ -1,6 +1,7 @@
 package com.lm.cms2.mapper;
 
 
+import com.lm.cms2.model.Article;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -21,6 +22,17 @@ public interface HomeMapper {
     @Select("select * from t_article order by t_article_id desc limit #{offset},#{limit}")
     public List<Map<String,Object>> getArticle(@Param("offset") int offset, @Param("limit") int limit);
 
+    @Select("select * from t_article order by t_article_id desc limit #{offset},#{limit}")
+    public List<Article> getArticleClick(@Param("offset") int offset, @Param("limit") int limit);
+
+    @Select("select * from t_article where t_classification_code=#{t_classification_code} ")
+    public List<Map<String,Object>> getTplb(@Param("t_classification_code")String t_classification_code);
+
+    @Select("select * from t_article where t_classification_code=#{t_classification_code} ")
+    public List<Map<String,Object>> getTjgl(@Param("t_classification_code")String t_classification_code);
+
+    @Select("select * from t_article where t_article_id=#{t_article_id} ")
+    Map selectById(@Param("t_article_id") int t_article_id);
 
 
 }
