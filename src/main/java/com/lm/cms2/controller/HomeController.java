@@ -5,7 +5,7 @@ import com.lm.cms2.mapper.CommentMapper;
 import com.lm.cms2.mapper.HomeMapper;
 import com.lm.cms2.model.Article;
 import com.lm.cms2.redis.JedisService;
-import com.lm.cms2.util.RedisKeyUntil;
+import com.lm.cms2.util.RedisKeyUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
@@ -53,9 +53,9 @@ public class HomeController {
         mv.addObject("SY_GGGL",SY_GGGL);
 
         Map clickCount=new HashMap();
-        String countStr1 = jedisService.get(RedisKeyUntil.getClickCountKey("/"));
-        String countStr2 = jedisService.get(RedisKeyUntil.getClickCountKey("/index"));
-        String countStr3 = jedisService.get(RedisKeyUntil.getClickCountKey("/page/1"));
+        String countStr1 = jedisService.get(RedisKeyUtil.getClickCountKey("/"));
+        String countStr2 = jedisService.get(RedisKeyUtil.getClickCountKey("/index"));
+        String countStr3 = jedisService.get(RedisKeyUtil.getClickCountKey("/page/1"));
         String currentPage = String.valueOf(Integer.parseInt(countStr1==null?"0":countStr1)
                 + Integer.parseInt(countStr2==null?"0":countStr2)+ Integer.parseInt(countStr3==null?"0":countStr3));
         clickCount.put("currentPage",currentPage);
@@ -98,9 +98,9 @@ public class HomeController {
         mv.addObject("SY_GGGL",SY_GGGL);
 
         Map clickCount=new HashMap();
-        String countStr1 = jedisService.get(RedisKeyUntil.getClickCountKey("/"));
-        String countStr2 = jedisService.get(RedisKeyUntil.getClickCountKey("/index"));
-        String countStr3 = jedisService.get(RedisKeyUntil.getClickCountKey("/page/1"));
+        String countStr1 = jedisService.get(RedisKeyUtil.getClickCountKey("/"));
+        String countStr2 = jedisService.get(RedisKeyUtil.getClickCountKey("/index"));
+        String countStr3 = jedisService.get(RedisKeyUtil.getClickCountKey("/page/1"));
         String currentPage = String.valueOf(Integer.parseInt(countStr1==null?"0":countStr1)
                 + Integer.parseInt(countStr2==null?"0":countStr2)+ Integer.parseInt(countStr3==null?"0":countStr3));
         clickCount.put("currentPage",currentPage);
@@ -142,7 +142,7 @@ public class HomeController {
         mv.setViewName("/app/journalism.html");
         mv.addObject("recenodes",list);
         Map clickCount=new HashMap();
-        String currentPage = jedisService.get(RedisKeyUntil.getClickCountKey("/article/"+t_article_Id));
+        String currentPage = jedisService.get(RedisKeyUtil.getClickCountKey("/article/"+t_article_Id));
         clickCount.put("currentPage",currentPage);
         mv.addObject("clickCount",clickCount);
         //hotArticle
