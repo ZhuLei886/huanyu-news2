@@ -1,8 +1,9 @@
 /*
 SQLyog Professional v12.09 (64 bit)
-MySQL - 5.5.56 : Database - mrxw
+MySQL - 5.5.56 : Database - news
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
